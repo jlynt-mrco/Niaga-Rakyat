@@ -1,159 +1,181 @@
-🧾 Niaga Rakyat POS System v0.1
+# 🧾 Niaga Rakyat POS System
 
-Sistem Kasir (Point of Sale) berbasis web yang modern, responsif, dan mudah digunakan.
-Dibangun menggunakan PHP Native, Tailwind CSS, dan MySQL.
+Sistem Kasir (Point of Sale) berbasis web yang modern, responsif, dan mudah digunakan.  
+Dibangun menggunakan **PHP Native**, **Tailwind CSS**, dan **MySQL**.
 
+![Version](https://img.shields.io/badge/version-0.1-blue)
+![PHP](https://img.shields.io/badge/PHP-7.4+-purple)
+![MySQL](https://img.shields.io/badge/MySQL-5.7+-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
 
+---
 
+## 🚀 Versi
 
+### v0.1 — Maret 2026
+- Rilis perdana aplikasi
+- Manajemen produk, kategori, supplier
+- Modul transaksi kasir
+- Laporan penjualan
+- Sistem login multi-level (Admin & Kasir)
 
+---
 
+## 🔮 Roadmap Pengembangan
 
+- v0.2 — Grafik interaktif & dashboard kustom
+- v0.3 — Modul pembelian & stok masuk
+- v0.4 — Manajemen pelanggan & hutang piutang
+- v0.5 — Notifikasi stok menipis
+- v0.6 — Backup database otomatis
+- v0.7 — Multi-cabang
+- v0.8 — Integrasi barcode scanner
+- v0.9 — Aplikasi mobile companion
+- v1.0 — Rilis stabil semua fitur utama
 
-📌 Changelog
-🚀 v0.1 (Maret 2026)
+---
 
-Rilis perdana aplikasi
+## ✨ Fitur Utama
 
-Fitur dasar manajemen produk, kategori, supplier
+- 📊 Dashboard statistik real-time
+- 📦 CRUD produk + upload gambar
+- 🏷️ Manajemen kategori & supplier
+- 🛒 Transaksi kasir cepat & intuitif
+- 🧾 Cetak struk 80mm
+- 📈 Laporan penjualan (filter tanggal)
+- 📤 Export CSV & Excel
+- 👥 Multi-level user (Admin & Kasir)
+- 📱 Responsive (Desktop, Tablet, Mobile)
 
-Modul transaksi kasir
+---
 
-Laporan penjualan
+## 🛠️ Teknologi
 
-Sistem login multi-level
+**Backend**
+- PHP Native (tanpa framework)
 
-🔮 Rencana Update Selanjutnya
-Versi	Fitur
-v0.2	Grafik lebih interaktif & dashboard kustom
-v0.3	Modul pembelian & stok masuk
-v0.4	Manajemen pelanggan & hutang piutang
-v0.5	Notifikasi stok menipis
-v0.6	Backup database otomatis
-v0.7	Multi-cabang
-v0.8	Integrasi barcode scanner
-v0.9	Aplikasi mobile companion
-v1.0	Rilis stabil semua fitur utama
-✨ Fitur Utama
+**Frontend**
+- Tailwind CSS (CDN)
+- Font Awesome 6
+- DataTables
+- Chart.js
+- jQuery
 
-📊 Dashboard interaktif (statistik real-time)
+**Database**
+- MySQL
 
-📦 Manajemen produk (CRUD + upload gambar)
+**Library Tambahan**
+- PhpSpreadsheet (Export Excel)
 
-🏷️ Manajemen kategori & supplier
+---
 
-🛒 Transaksi kasir (POS cepat & intuitif)
+## 💻 Persyaratan Sistem
 
-🧾 Cetak struk 80mm
+- PHP 7.4+
+- MySQL 5.7+
+- Apache / Nginx
+- Browser modern
 
-📈 Laporan penjualan (filter tanggal + export CSV/Excel)
+---
 
-👥 Multi-level user (Admin & Kasir)
+## ⚙️ Instalasi
 
-📱 Responsive design (Desktop, Tablet, Mobile)
+### 1️⃣ Clone Repository
 
-🛠️ Teknologi yang Digunakan
-Backend
-
-PHP Native (tanpa framework)
-
-Database
-
-MySQL
-
-Frontend
-
-Tailwind CSS (CDN)
-
-Font Awesome 6
-
-DataTables
-
-Chart.js
-
-Library Tambahan
-
-jQuery
-
-PhpSpreadsheet (Export Excel)
-
-💻 Persyaratan Sistem
-
-PHP 7.4+
-
-MySQL 5.7+
-
-Apache / Nginx
-
-Browser modern (Chrome, Firefox, Edge, Safari)
-
-⚙️ Instalasi
-1️⃣ Clone Repository
+```bash
 git clone https://github.com/username/niaga-rakyat-pos.git
 cd niaga-rakyat-pos
-2️⃣ Buat Database
+```
 
-Buka phpMyAdmin atau terminal MySQL
+---
+
+### 2️⃣ Buat Database
 
 Buat database baru:
 
+```sql
 CREATE DATABASE kasir_pos;
+```
 
-Import file database.sql
+Import file:
+```
+database.sql
+```
 
-3️⃣ Konfigurasi Database
+---
 
-Buka file config.php, lalu sesuaikan:
+### 3️⃣ Konfigurasi Database
 
+Edit file `config.php`:
+
+```php
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'kasir_pos');
-4️⃣ Buat Folder Uploads
+```
+
+---
+
+### 4️⃣ Buat Folder Upload
+
+```bash
 mkdir uploads
 mkdir uploads/products
+```
 
-Pastikan folder memiliki permission write (755 atau 777).
+Pastikan permission write (755 / 777).
 
-5️⃣ Install Dependency (Opsional - Export Excel)
+---
+
+### 5️⃣ Install Dependency (Opsional)
+
+Untuk fitur export Excel:
+
+```bash
 composer require phpoffice/phpspreadsheet
+```
 
-Jika tidak menggunakan fitur export Excel, langkah ini bisa dilewati.
+---
 
-6️⃣ Akses Aplikasi
+### 6️⃣ Jalankan Aplikasi
 
-Buka browser:
+Buka di browser:
 
+```
 http://localhost/kasir/
-🔑 Login Default
+```
 
-Admin
+---
 
+## 🔑 Login Default
+
+**Admin**
+```
 Username: admin
-
 Password: admin123
+```
 
-Kasir
-
+**Kasir**
+```
 Username: kasir
-
 Password: kasir123
+```
 
-📁 Struktur Folder
+---
+
+## 📁 Struktur Folder
+
+```
 niaga-rakyat-pos/
+│
 ├── assets/
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│   │   └── script.js
+│   ├── css/style.css
+│   ├── js/script.js
 │   └── logo/
-│       ├── logo.png
-│       ├── logoicon.png
-│       └── logosidebar.png
-├── uploads/
-│   └── products/
-├── api/
-│   └── get_product.php
+│
+├── uploads/products/
+├── api/get_product.php
 ├── config.php
 ├── database.sql
 ├── dashboard.php
@@ -162,83 +184,68 @@ niaga-rakyat-pos/
 ├── products.php
 ├── receipt.php
 ├── reports.php
-├── sidebar.php
 ├── transactions.php
 ├── export.php
 └── README.md
-📖 Cara Penggunaan
-📦 Manajemen Produk
+```
 
-Buka menu Produk
+---
 
-Klik Tambah Produk
+## 📖 Cara Penggunaan
 
-Isi form (barcode, nama, kategori, supplier, harga, stok)
+### 📦 Tambah Produk
+1. Masuk menu **Produk**
+2. Klik **Tambah Produk**
+3. Isi data
+4. Klik **Simpan**
 
-Klik Simpan
+### 🛒 Transaksi Kasir
+1. Masuk menu **Kasir**
+2. Cari produk
+3. Tambahkan ke keranjang
+4. Masukkan nominal bayar
+5. Klik **Proses Transaksi**
+6. Cetak struk
 
-🛒 Transaksi Kasir
+### 📊 Laporan
+1. Masuk menu **Laporan**
+2. Pilih tanggal
+3. Klik **Tampilkan**
+4. Export jika diperlukan
 
-Buka menu Kasir
+---
 
-Cari produk
+## 🤝 Kontribusi
 
-Klik produk untuk menambahkan ke keranjang
+1. Fork repository
+2. Buat branch baru
+   ```bash
+   git checkout -b fitur-baru
+   ```
+3. Commit
+   ```bash
+   git commit -m "Menambahkan fitur baru"
+   ```
+4. Push & Pull Request
 
-Atur jumlah
+---
 
-Masukkan nominal bayar
+## 📜 Lisensi
 
-Klik Proses Transaksi
-
-Cetak struk jika diperlukan
-
-📊 Laporan Penjualan
-
-Buka menu Laporan
-
-Pilih rentang tanggal
-
-Klik Tampilkan
-
-Export ke CSV / Excel jika diperlukan
-
-🤝 Kontribusi
-
-Kami sangat terbuka untuk kontribusi!
-
-Fork repository
-
-Buat branch baru:
-
-git checkout -b fitur-baru
-
-Commit perubahan:
-
-git commit -m "Menambahkan fitur baru"
-
-Push:
-
-git push origin fitur-baru
-
-Buat Pull Request
-
-📜 Lisensi
-
-Hak cipta dilindungi undang-undang.
-© 2026 Julyant Marco Melandry
+© 2026 Julyant Marco Melandry  
 All Rights Reserved.
 
-📞 Kontak
+---
 
-Julyant Marco Melandry
+## 📞 Kontak
 
-Email: email@example.com
+Julyant Marco Melandry  
+Email: email@example.com  
+GitHub: https://github.com/username  
+Website: https://example.com  
 
-GitHub: https://github.com/username
+---
 
-Website: https://example.com
-
-❤️ Credits
+## ❤️ Credits
 
 Dibuat dengan ❤️ oleh Julyant Marco Melandry
