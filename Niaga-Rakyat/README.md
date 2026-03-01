@@ -16,27 +16,38 @@ Sistem Kasir (Point of Sale) berbasis web yang modern, responsif, dan mudah digu
 - Laporan penjualan
 - Sistem login multi-level
 
+### Rencana Update Selanjutnya
+- v0.2 - Fitur grafik yang lebih interaktif, dashboard kustom
+- v0.3 - Modul pembelian dan stok masuk
+- v0.4 - Manajemen pelanggan dan hutang piutang
+- v0.5 - Notifikasi stok menipis
+- v0.6 - Backup database otomatis
+- v0.7 - Multi-cabang
+- v0.8 - Integrasi barcode scanner
+- v0.9 - Aplikasi mobile companion
+- v1.0 - Rilis stabil dengan semua fitur utama
+
 ## Fitur Utama
 
-- **Dashboard Interaktif** - Statistik real-time dengan grafik penjualan
-- **Manajemen Produk** - CRUD produk dengan kategori, supplier, dan upload gambar
-- **Manajemen Kategori & Supplier** - Kelola data master dengan mudah
-- **Transaksi Kasir (POS)** - Antarmuka kasir yang cepat dan intuitif
-- **Cetak Struk** - Format struk 80mm siap cetak
-- **Laporan Penjualan** - Filter tanggal, export CSV/Excel
-- **Multi-level User** - Role Admin dan Kasir
-- **Responsive Design** - Bisa diakses via desktop, tablet, dan mobile
+- Dashboard Interaktif - Statistik real-time dengan grafik penjualan
+- Manajemen Produk - CRUD produk dengan kategori, supplier, dan upload gambar
+- Manajemen Kategori & Supplier - Kelola data master dengan mudah
+- Transaksi Kasir (POS) - Antarmuka kasir yang cepat dan intuitif
+- Cetak Struk - Format struk 80mm siap cetak
+- Laporan Penjualan - Filter tanggal, export CSV/Excel
+- Multi-level User - Role Admin dan Kasir
+- Responsive Design - Bisa diakses via desktop, tablet, dan mobile
 
 ## Teknologi yang Digunakan
 
-- **Backend**: PHP Native (tanpa framework)
-- **Database**: MySQL
-- **Frontend**: 
+- Backend: PHP Native (tanpa framework)
+- Database: MySQL
+- Frontend: 
   - Tailwind CSS (CDN)
   - Font Awesome 6
   - DataTables
   - Chart.js
-- **Library Tambahan**:
+- Library Tambahan:
   - jQuery
   - PhpSpreadsheet (export Excel)
 
@@ -47,9 +58,55 @@ Sistem Kasir (Point of Sale) berbasis web yang modern, responsif, dan mudah digu
 - Web Server (Apache/Nginx)
 - Browser modern (Chrome, Firefox, Edge, Safari)
 
-## Instalasi Lengkap
+## Instalasi
 
-[Struktur Folder]
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/username/niaga-rakyat-pos.git
+   cd niaga-rakyat-pos
+Buat Database
+
+Buka phpMyAdmin atau terminal MySQL
+
+Buat database baru dengan nama kasir_pos
+
+Import file database.sql yang sudah disediakan
+
+Konfigurasi Koneksi Database
+
+Buka file config.php
+
+Sesuaikan konfigurasi database jika perlu:
+
+php
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'kasir_pos');
+Buat Folder Uploads
+
+bash
+mkdir uploads
+mkdir uploads/products
+Pastikan folder uploads/products memiliki permission write (755 atau 777)
+
+Install Dependencies (Opsional untuk export Excel)
+
+bash
+composer require phpoffice/phpspreadsheet
+Jika tidak menggunakan fitur export Excel, bisa diabaikan
+
+Akses Aplikasi
+
+Buka browser dan akses: http://localhost/kasir/
+
+Login dengan akun default:
+
+Admin: username: admin, password: admin123
+
+Kasir: username: kasir, password: kasir123
+
+Struktur Folder
 text
 niaga-rakyat-pos/
 ├── assets/
@@ -77,118 +134,65 @@ niaga-rakyat-pos/
 ├── transactions.php
 ├── export.php
 └── README.md
+Cara Penggunaan
+Manajemen Produk
+Buka menu Produk
 
-[1. Clone Repository]
-```bash
-git clone https://github.com/username/niaga-rakyat-pos.git
-cd niaga-rakyat-pos
+Klik tombol Tambah Produk untuk menambah produk baru
 
-[2. Buat Database dan Import SQL]
-sql
-CREATE DATABASE IF NOT EXISTS kasir_pos;
-USE kasir_pos;
+Isi form produk (barcode, nama, kategori, supplier, harga, stok)
 
-CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    nama_lengkap VARCHAR(100) NOT NULL,
-    role ENUM('admin', 'kasir') DEFAULT 'kasir',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+Klik Simpan
 
-CREATE TABLE categories (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nama_kategori VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+Transaksi Kasir
+Buka menu Kasir
 
-CREATE TABLE suppliers (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nama_supplier VARCHAR(100) NOT NULL,
-    no_telp VARCHAR(20),
-    alamat TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+Cari produk menggunakan kotak pencarian
 
-CREATE TABLE products (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    barcode VARCHAR(50) UNIQUE,
-    nama_produk VARCHAR(100) NOT NULL,
-    kategori_id INT NULL,
-    supplier_id INT NULL,
-    harga_beli DECIMAL(10,2) NOT NULL,
-    harga_jual DECIMAL(10,2) NOT NULL,
-    stok INT DEFAULT 0,
-    gambar VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (kategori_id) REFERENCES categories(id) ON DELETE SET NULL,
-    FOREIGN KEY (supplier_id) REFERENCES suppliers(id) ON DELETE SET NULL
-);
+Klik produk yang ingin dibeli
 
-CREATE TABLE sales (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    invoice VARCHAR(50) UNIQUE NOT NULL,
-    user_id INT,
-    total_harga DECIMAL(10,2) NOT NULL,
-    diskon DECIMAL(10,2) DEFAULT 0,
-    pajak DECIMAL(10,2) DEFAULT 0,
-    total_bayar DECIMAL(10,2) NOT NULL,
-    uang_bayar DECIMAL(10,2) NOT NULL,
-    uang_kembali DECIMAL(10,2) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
-);
+Atur jumlah di keranjang
 
-CREATE TABLE sale_details (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    sale_id INT,
-    product_id INT,
-    harga_jual DECIMAL(10,2) NOT NULL,
-    jumlah INT NOT NULL,
-    subtotal DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (sale_id) REFERENCES sales(id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
-);
+Masukkan nominal uang bayar
 
-INSERT INTO users (username, password, nama_lengkap, role) VALUES
-('admin', MD5('admin123'), 'Administrator', 'admin'),
-('kasir', MD5('kasir123'), 'Kasir Toko', 'kasir');
+Klik Proses Transaksi
 
-INSERT INTO categories (nama_kategori) VALUES
-('Makanan'), ('Minuman'), ('Elektronik'), ('Pakaian'), ('Lainnya');
+Cetak struk jika diperlukan
 
-INSERT INTO suppliers (nama_supplier, no_telp, alamat) VALUES
-('Supplier 1', '021-1234567', 'Jakarta'),
-('Supplier 2', '031-7654321', 'Surabaya'),
-('Supplier 3', '024-5555555', 'Semarang');
+Laporan Penjualan
+Buka menu Laporan
 
-3. Konfigurasi Koneksi Database
-Buka file config.php dan sesuaikan konfigurasi database jika perlu:
+Pilih rentang tanggal
 
-php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'kasir_pos');
-define('BASE_URL', 'http://localhost/kasir/');
-define('APP_NAME', 'Niaga Rakyat');
+Klik Tampilkan
 
-[4. Buat Folder Uploads]
-bash
-mkdir uploads
-mkdir uploads/products
-chmod 777 uploads/products
+Export ke CSV atau Excel jika diperlukan
 
-[5. Install Dependencies (Opsional untuk export Excel)]
-bash
-composer require phpoffice/phpspreadsheet
+Kontribusi
+Kami sangat terbuka untuk kontribusi! Silakan fork repository ini dan buat pull request untuk penambahan fitur atau perbaikan bug.
 
-[6. Akses Aplikasi]
-Buka browser dan akses: http://localhost/kasir/
+Fork repository
 
-Login dengan akun default:
+Buat branch baru (git checkout -b fitur-baru)
 
-Admin: username admin, password admin123
+Commit perubahan (git commit -m 'Menambahkan fitur baru')
 
-Kasir: username kasir, password kasir123
+Push ke branch (git push origin fitur-baru)
+
+Buat Pull Request
+
+Lisensi
+Hak cipta dilindungi undang-undang. © 2026 Julyant Marco Melandry.
+All Rights Reserved.
+
+Kontak
+Julyant Marco Melandry
+
+Email: email@example.com
+
+GitHub: github.com/username
+
+Website: example.com
+
+Credits
+Dibuat dengan ❤️ oleh Julyant Marco Melandry
